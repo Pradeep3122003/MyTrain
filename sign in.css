@@ -1,0 +1,109 @@
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to right, #1a1a1a, #333);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background: url('railway.png')  no-repeat center center fixed;
+    background-size: cover;
+    filter:blur(50);
+}
+
+.container {
+    background: #1a1a1abc;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 400px;
+    padding: 20px;
+}
+
+.container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 700;
+    margin-top: 40px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    align-items: center;
+    width: 50%;
+    display: inline-block;
+    margin-left: 100px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #555;
+    background: #2a2a2a;
+    color: white;
+    font-size: 14px;
+    display: block;
+    margin:0 auto;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: orange;
+}
+
+.btn {
+    width: 40%;
+    padding: 10px;
+    background: orange;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    display: block;
+    margin: 5px auto;
+    margin-top: 40px;
+}
+
+.btn:hover {
+    background: #e67e22;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.footer a {
+    color: orange;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 15px;
+    }
+
+    .container h2 {
+        font-size: 20px;
+    }
+
+    .btn {
+        font-size: 14px;
+    }
+}
