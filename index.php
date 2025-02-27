@@ -78,7 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <script>
 let login =document.getElementById("btn")
 login.onclick = () => {
-    window.open("login.php")
+    window.open("login.php", "_self");
 }</script>
 </body>
 </html>
