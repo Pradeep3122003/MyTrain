@@ -1,0 +1,151 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: url('railway.png') no-repeat center center fixed; /* Train image as background */
+    background-size: cover;
+    color: white;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    backdrop-filter: blur(5px); /* Optional: Adds a blur effect behind the container */
+}
+
+.payment-box {
+    background: rgba(0, 0, 0, 0.7); /* Slightly transparent black */
+    padding: 30px;
+    border-radius: 10px;
+    text-align: left;
+}
+
+h2 {
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #fff;
+}
+
+.payment-methods {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.payment-button {
+    background: #333;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+}
+
+.payment-button i {
+    margin-right: 5px;
+}
+
+.payment-button:hover {
+    background: #555;
+}
+
+.payment-form {
+    margin-top: 20px;
+}
+
+h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+    color: #fff; /* Changed label color to white */
+    font-size: 14px;
+    font-weight: bold; /* Added font weight */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Added text shadow for better visibility */
+}
+
+input, select {
+    width: 100%;
+    padding: 12px; /* Adjusted padding to match image */
+    border: 1px solid #ff6600; /* Adjusted border color */
+    background: rgba(0, 0, 0, 0.5); /* Adjusted background */
+    color: white;
+    outline: none;
+    transition: border-color 0.3s;
+    border-radius: 20px; /* Adjusted border radius */
+}
+
+input::placeholder {
+    color: #ddd; /* Adjusted placeholder color */
+}
+
+input:focus, select:focus {
+    border-color: #ff6600; /* Orange */
+    box-shadow: 0 0 5px rgba(255, 102, 0, 0.5); /* Added a subtle glow effect */
+}
+
+.pay-button {
+    width: 100%;
+    padding: 12px;
+    background: #ff6600; /* Orange */
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.pay-button:hover {
+    background: #d65200;
+}
+
+.secure-payment {
+    text-align: center;
+    color: #ccc;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.secure-payment i {
+    margin-right: 5px;
+}
+/* Style for the input with icon */
+.input-with-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-with-icon i {
+    position: absolute;
+    left: 10px;
+    color: #777;
+}
+
+.input-with-icon input {
+    padding-left: 30px; /* Adjust to make space for the icon */
+}
