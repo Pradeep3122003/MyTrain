@@ -33,7 +33,7 @@ require("db.php");
 
 // User is authenticated
 $user = $_SESSION['name'];
-$mobile = $_SESSION['mobile'];
+$email = $_SESSION['email'];
 
 
 ?>
