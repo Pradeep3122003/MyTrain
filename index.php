@@ -11,9 +11,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $email = $_POST["email"];
         $email = mysqli_real_escape_string($link, $email);
 
-        $pass = $_POST["pass"];
+        $pass = $_POST["password"];
         $pass = mysqli_real_escape_string($link, $pass);
-        $pass = hash("sha1", $pass, false);
 
         // Check if the user already exists
         $sql = "SELECT * FROM login WHERE email = '$email'";

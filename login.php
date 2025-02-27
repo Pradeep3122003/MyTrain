@@ -12,7 +12,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt = $link->prepare($sql);
     
     if ($stmt) {
-        $pass = hash("sha1", $pass, false); // ❌ Use `password_hash()` & `password_verify()` instead
         $stmt->bind_param("ss", $name, $pass);
         $stmt->execute();
         $result = $stmt->get_result();
