@@ -12,7 +12,7 @@ body {
 
 .container {
     background: rgba(0, 0, 0, 0.6);
-    padding: 20px;
+    padding: 50px;
     border-radius: 10px;
     color: white;
     text-align: center;
@@ -22,6 +22,8 @@ body {
 .input-group {
     margin: 10px 0;
     text-align: left;
+    margin-left: 50px;
+    padding: 5px;
 }
 
 label {
@@ -32,7 +34,7 @@ label {
 
 input {
     display: block;
-    width: 100%;
+    width: 70%;
     padding: 10px;
     border: 2px solid transparent;
     border-radius: 5px;
@@ -40,6 +42,7 @@ input {
     color: white;
     outline: none;
     transition: border 0.3s ease-in-out;
+    
 }
 
 /* Orange border effect when clicking */
@@ -48,7 +51,7 @@ input:focus {
 }
 
 button {
-    width: 100%;
+    width: 20%;
     padding: 10px;
     background: orange;
     border: none;
