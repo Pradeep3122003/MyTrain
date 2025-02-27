@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $sql_insert = "INSERT INTO login(name,email,password) VALUES ('$name', '$email', '$pass')";
             if ($link->query($sql_insert) === TRUE) {
                 $exist = 2;
-                header("Location: index.php");
+                header("Location: login.php");
 
             } else {
                 echo "<p>Error: " . $link->error . "</p>";
@@ -75,6 +75,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             Already have an account? <a href="#" id="btn">Login</a>
         </div>
     </div>
-    <script src="signin.js"></script>
+    <script>
+let login =document.getElementById("btn")
+login.onclick = () => {
+    window.open("login.php")
+}</script>
 </body>
 </html>
