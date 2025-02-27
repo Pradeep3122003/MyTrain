@@ -3,39 +3,43 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 ?>
 <?php
-session_start();
-
-// Check if name and mob are passed via URL and set them in the session
-if (isset($_GET['name']) && isset($_GET['email'])) {
-    $_SESSION['name'] = $_GET['name'];
-    $_SESSION['email'] = $_GET['email'];
-    $_SESSION['token'] = $_GET['token'];
-}
-
-if (!isset($_SESSION['name']) || !isset($_SESSION['email']) || !isset($_SESSION['token'])) {
-    die("Unauthorized access!");
-}
-
-// Validate the token
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Check token sent with form submission (POST)
-    if (!isset($_POST['token']) || $_POST['token'] !== $_SESSION['token']) {
-        die("Invalid token!");
-    }
-} else {
-    // Check token in GET request (page load)
-    if (!isset($_GET['token']) || $_GET['token'] !== $_SESSION['token']) {
-        die("Invalid token!");
-    }
-}
-
 require("db.php");
+$exist = 0; // Initialize the variable
 
-// User is authenticated
-$user = $_SESSION['name'];
-$email = $_SESSION['email'];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $from = $_POST["from"];
+    $to = $_POST["to"];
+    $date = $_POST["date"];
 
 
+//if (!isset($_POST['token']) || $_POST['token'] !== $_SESSION['token']) {
+  //      die("Invalid token!");
+//}
+
+if (!isset($_POST['from']) || !isset($_POST['to']) || !isset($_POST['date'])) {
+        die("Fill all fields!");
+}
+
+$sql = "SELECT * FROM train WHERE src = ? AND dest = ? AND DATE(src_depar) = ?";
+$stmt = $link->prepare($sql);
+
+if ($stmt) {
+    $stmt->bind_param("sss", $from, $to, $date);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($row = $result->fetch_assoc()) {
+        $exist = 1;
+    } else {
+        $exist = 2; // No match found
+    }
+
+    $stmt->close();
+} else {
+    die("Query failed: " . $link->error);
+}
+
+}    // Prepare SQL to fetch email along with validation
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -140,7 +144,9 @@ $email = $_SESSION['email'];
 <body>
     <div class="container">
         <div class="header">
-            <h2><br>Trains Available</br></h2>
+            <h2><br>
+<?php if ($exist == 2) { ?>No <?php } ?>
+Trains Available</br></h2>
         </div>
         <table class="train-table">
             <thead>
@@ -153,43 +159,23 @@ $email = $_SESSION['email'];
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Narasapur - SMVT Bengaluru Special</td>
-                    <td>21:00<br>BGM, Belagavi</td>
-                    <td>10hr 25min<br>13 stops, 611 km</td>
-                    <td>07:25<br>SBC, Bengaluru</td>
-                    <td><button class="book-btn">Book</button></td>
-                </tr>
-                <tr>
-                    <td>Belagavi Yesvantpur Express</td>
-                    <td>21:35<br>BGM, Belagavi</td>
-                    <td>10hr 55min<br>16 stops, 606 km</td>
-                    <td>08:30<br>YPR, Yesvantpur</td>
-                    <td><button class="book-btn">Book</button></td>
-                </tr>
-                <tr>
-                    <td>Belagavi KSR Bengaluru Express</td>
-                    <td>21:00<br>BGM, Belagavi</td>
-                    <td>10hr 30min<br>13 stops, 611 km</td>
-                    <td>07:30<br>SBC, Bengaluru</td>
-                    <td><button class="book-btn">Book</button></td>
-                </tr>
-                <tr>
-                    <td>Vishwamanav Express</td>
-                    <td>05:45<br>BGM, Belagavi</td>
-                    <td>14hr 55min<br>33 stops, 749 km</td>
-                    <td>20:40<br>MYS, Mysuru</td>
-                    <td><button class="book-btn">Book</button></td>
-                </tr>
-                <tr>
-                    <td>Belagavi Mugr Special</td>
-                    <td>13:10<br>BGM, Belagavi</td>
-                    <td>23hr 40min<br>36 stops, 1143 km</td>
-                    <td>12:50<br>MUGR, Manuguru</td>
-                    <td><button class="book-btn">Book</button></td>
-                </tr>
+                <?php if ($exist == 1) { ?>
+
+        <tr>
+            <td><?= htmlspecialchars($row['name']) ?></td>
+            <td><?= htmlspecialchars(date("H:i", strtotime($row['src_depar']))) ?><br><?= htmlspecialchars($row['src']) ?></td>
+            <td><?= htmlspecialchars($row['distance']) ?> km</td>
+            <td><?= htmlspecialchars(date("H:i", strtotime($row['dest_arriv']))) ?><br><?= htmlspecialchars($row['dest']) ?></td>
+            <td><button class="book-btn">Book</button></td>
+        </tr>
+
+<?php } else { ?>
+    <p>Please do check for other dates.</p>
+<?php } ?>
             </tbody>
         </table>
+
+
     </div>
 </body>
 </html>

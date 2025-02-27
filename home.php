@@ -34,7 +34,7 @@ require("db.php");
 // User is authenticated
 $user = $_SESSION['name'];
 $email = $_SESSION['email'];
-
+$token = $_SESSION['token'];
 
 ?>
 <!DOCTYPE html>
@@ -57,7 +57,7 @@ $email = $_SESSION['email'];
         <div class="right-section">
             <div class="form-box">
                 <h2>BOOK <span class="highlight">TICKET</span><span class="dot">.</span></h2>
-                <form>
+                <form action="train.php" method="POST">
                     <div class="input-group">
                         <label for="from">FROM</label>
                         <div class="input-with-icon">
@@ -79,6 +79,7 @@ $email = $_SESSION['email'];
                             <input type="date" id="date" name="date" required>
                         </div>
                     </div>
+                           <input type="hidden" name="token" value="<?php echo $token; ?>" >
                     <button type="submit">SEARCH</button>
                 </form>
                 <p>Don't have an account? <a href="signin.html">Create new</a></p>
