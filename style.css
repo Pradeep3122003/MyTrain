@@ -2,100 +2,67 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
+    background: url('railway.png') no-repeat center center fixed;
+    background-size: cover;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #111;
 }
 
 .container {
-    display: flex;
-    width: 80%;
-    height: 80vh;
-    background: #222;
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.image-section {
-    width: 50%;
-    background: #ff6600;
-    position: relative;
-}
-
-.image-section img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.form-section {
-    width: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    background: #1a1a1a;
-    color: white;
-}
-
-.login-box, .signup-box {
-    width: 80%;
+    background: rgba(0, 0, 0, 0.6);
     padding: 20px;
-    background: #2a2a2a;
-    border-radius: 8px;
+    border-radius: 10px;
+    color: white;
     text-align: center;
-}
-
-h2 {
-    margin-bottom: 20px;
+    width: 300px;
 }
 
 .input-group {
+    margin: 10px 0;
     text-align: left;
-    margin-bottom: 15px;
 }
 
-.input-group label {
+label {
     display: block;
+    font-size: 14px;
     margin-bottom: 5px;
 }
 
-.input-group input {
+input {
+    display: block;
     width: 100%;
     padding: 10px;
-    border: none;
+    border: 2px solid transparent;
     border-radius: 5px;
-    background: #333;
+    background: black;
     color: white;
+    outline: none;
+    transition: border 0.3s ease-in-out;
+}
+
+/* Orange border effect when clicking */
+input:focus {
+    border: 2px solid orange;
 }
 
 button {
     width: 100%;
     padding: 10px;
-    background: #ff6600;
+    background: orange;
     border: none;
     color: white;
-    font-size: 16px;
     cursor: pointer;
+    font-size: 16px;
     border-radius: 5px;
-    transition: 0.3s;
 }
 
 button:hover {
-    background: #e65c00;
-}
-
-p {
-    margin-top: 10px;
+    background: darkorange;
 }
 
 a {
-    color: #ff6600;
+    color: orange;
     text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
 }
