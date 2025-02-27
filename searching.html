@@ -5,27 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Train Ticket Booking</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
     <div class="container">
-        <div class="form-box">
-            <h2>BOOK <span class="highlight">TICKET</span>.</h2>
-            <form>
-                <div class="input-group">
-                    <label for="from">FROM</label>
-                    <input type="text" id="from" name="from" placeholder="Search departure station" required>
-                </div>
-                <div class="input-group">
-                    <label for="to">TO</label>
-                    <input type="text" id="to" name="to" placeholder="Search destination station" required>
-                </div>
-                <div class="input-group">
-                    <label for="date">DATE</label>
-                    <input type="date" id="date" name="date" required>
-                </div>
-                <button type="submit">SEARCH</button>
-            </form>
-            <p>Don't have an account? <a href="signin.html">Create new</a></p>
+        <div class="left-section">
+            <div class="logo-area">
+                <img src="irctc_logo.png" alt="IRCTC Logo" class="irctc-logo">
+                <span class="indian-railways-text">Indian Railways</span>
+            </div>
+        </div>
+        <div class="right-section">
+            <div class="form-box">
+                <h2>BOOK <span class="highlight">TICKET</span><span class="dot">.</span></h2>
+                <form>
+                    <div class="input-group">
+                        <label for="from">FROM</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <input type="text" id="from" name="from" placeholder="Search departure station" required>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="to">TO</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="to" name="to" placeholder="Search destination station" required>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="date">DATE</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                            <input type="date" id="date" name="date" required>
+                        </div>
+                    </div>
+                    <button type="submit">SEARCH</button>
+                </form>
+                <p>Don't have an account? <a href="signin.html">Create new</a></p>
+            </div>
         </div>
     </div>
 </body>
