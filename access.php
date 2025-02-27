@@ -28,6 +28,6 @@ if (isset($_SESSION['token_time']) && (time() - $_SESSION['token_time'] > $token
 
 
 // Redirect to chat.php with token
-header("Location: search.php?name=" . urlencode($_SESSION['name']) . "&email=" . urlencode($_SESSION['email']) . "&token=" . $_SESSION['token']);
+header("Location: train.php?name=" . urlencode($_SESSION['name']) . "&email=" . urlencode($_SESSION['email']) . "&token=" . $_SESSION['token']);
 exit();
 ?>
