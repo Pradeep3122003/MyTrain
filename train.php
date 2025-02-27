@@ -3,6 +3,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 ?>
 <?php
+session_start();
 require("db.php");
 $exist = 0; // Initialize the variable
 
@@ -10,11 +11,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $from = $_POST["from"];
     $to = $_POST["to"];
     $date = $_POST["date"];
+    $token = $_POST["token"];
 
+if (!isset($_SESSION['token'])) {
+    die("Unauthorized access!");
+}
 
-//if (!isset($_POST['token']) || $_POST['token'] !== $_SESSION['token']) {
-  //      die("Invalid token!");
-//}
+if (!isset($_POST['token']) || $_POST['token'] !== $_SESSION['token']) {
+        die("Invalid token!");
+}
 
 if (!isset($_POST['from']) || !isset($_POST['to']) || !isset($_POST['date'])) {
         die("Fill all fields!");
@@ -39,6 +44,8 @@ if ($stmt) {
     die("Query failed: " . $link->error);
 }
 
+} else {
+  die("Invalid access");
 }    // Prepare SQL to fetch email along with validation
 ?>
 <!DOCTYPE html>

@@ -1,15 +1,10 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-?>
-<?php
-session_start();
 
+session_start();
 // Check if name and mob are passed via URL and set them in the session
-if (isset($_GET['name']) && isset($_GET['email'])) {
-    $_SESSION['name'] = $_GET['name'];
-    $_SESSION['email'] = $_GET['email'];
-    $_SESSION['token'] = $_GET['token'];
+if (isset($_POST['name']) && isset($_POST['email'])) {
+    $_SESSION['name'] = $_POST['name'];
+    $_SESSION['email'] = $_POST['email'];
 }
 
 if (!isset($_SESSION['name']) || !isset($_SESSION['email']) || !isset($_SESSION['token'])) {
@@ -34,7 +29,6 @@ require("db.php");
 // User is authenticated
 $user = $_SESSION['name'];
 $email = $_SESSION['email'];
-$token = $_SESSION['token'];
 
 ?>
 <!DOCTYPE html>
