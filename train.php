@@ -166,7 +166,7 @@ Trains Available</br></h2>
             <td><?= htmlspecialchars(date("H:i", strtotime($row['src_depar']))) ?><br><?= htmlspecialchars($row['src']) ?></td>
             <td><?= htmlspecialchars($row['distance']) ?> km</td>
             <td><?= htmlspecialchars(date("H:i", strtotime($row['dest_arriv']))) ?><br><?= htmlspecialchars($row['dest']) ?></td>
-            <td><button class="book-btn">Book</button></td>
+            <td><button class="book-btn" id="paybtn">Book</button></td>
         </tr>
 
 <?php } else { ?>
@@ -174,7 +174,11 @@ Trains Available</br></h2>
 <?php } ?>
             </tbody>
         </table>
-
+<script>
+let login =document.getElementById("paybtn")
+login.onclick = () => {
+    window.open("payment.php", "_self");
+}</script>
 
     </div>
 </body>
