@@ -42,7 +42,7 @@ if ($stmt) {
     } else {
         $exist = 2; // No match found
     }
-
+$token = $_SESSION['token'];
     $stmt->close();
 } else {
     die("Query failed: " . $link->error);
@@ -189,12 +189,15 @@ if ($exist == 1) {
 <script>
 
 let buttons = document.querySelectorAll(".book-btn"); // Select all buttons
+let token = "<?php echo htmlspecialchars($token, ENT_QUOTES, 'UTF-8'); ?>";
 
 buttons.forEach(button => {
     button.addEventListener("click", () => {
-        window.open("payment.php", "_self");
+
+        window.open(`payment.php?token=${token}`, "_self");
     });
 });
+
 
 </script>
 
