@@ -108,22 +108,14 @@ if ($token !== $_SESSION['token']) {
                 <p>From: <?php echo htmlspecialchars($src); ?></p>
                 <p>To: <?php echo htmlspecialchars($dest); ?></p>
                 <p>Date: <?php echo htmlspecialchars($src_depar); ?></p>
-                <p>Total: ₹<span id="total-price"><?php echo htmlspecialchars($distance); ?> RS</span></p>
+                <p>Total: <span id="total-price"><?php echo htmlspecialchars($distance); ?> RS</span></p>
                 <div class="input-group">
                     <label for="seat-type">Seat Type</label>
-<<<<<<< HEAD
                     <select id="seat-type" name="seat-type" onchange="updatePrice()">
                         <option value="<?php echo $distance; ?>">Sleeper - ₹<?php echo $distance; ?></option>
                         <option value="<?php echo $distance * 3; ?>">AC 3-Tier - ₹<?php echo $distance * 3; ?></option>
                         <option value="<?php echo $distance * 5; ?>">AC 2-Tier - ₹<?php echo $distance * 5; ?></option>
                         <option value="<?php echo $distance * 7; ?>">AC 1-Tier - ₹<?php echo $distance * 7; ?></option>
-=======
-                    <select id="seat-type" name="seat-type">
-                        <option value="sleeper">Sleeper  <p class="inlinespan"><?php echo $distance; ?> RS</p></option>
-                        <option value="ac3">AC 3-Tier  <span class="inlinespan"><?php echo $distance * 3; ?> RS</span></option>
-                        <option value="ac2">AC 2-Tier  <span class="inlinespan"><?php echo $distance * 5; ?> RS</span></option>
-                        <option value="ac1">AC 1-Tier  <span class="inlinespan"><?php echo $distance * 7; ?> RS</span></option>
->>>>>>> 6a0888f4850db1e96595316db800bfab04e25703
                     </select>
                 </div>
             </div>
