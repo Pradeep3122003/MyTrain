@@ -42,12 +42,7 @@ $token = $_SESSION['token'];
 </head>
 <body>
     <div class="container">
-        <div class="left-section">
-            <div class="logo-area">
-                
-                <span class="indian-railways-text"></span>
-            </div>
-        </div>
+       
         <div class="right-section">
             <div class="form-box">
                 <h2>BOOK <span class="highlight">TICKET</span><span class="dot">.</span></h2>
