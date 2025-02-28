@@ -85,7 +85,7 @@ if ($token !== $_SESSION['token']) {
                 </button>
             </div>
 
-            <div id="card-details" class="payment-form">
+            <form id="card-details" class="payment-form" action="payment.php" method="POST">
                 <h3>Enter Card Details</h3>
                 <div class="input-group">
                     <label for="card-number">Card Number</label>
@@ -115,9 +115,10 @@ if ($token !== $_SESSION['token']) {
                         <input type="text" id="card-holder" name="card-holder" placeholder="Enter card holder name" required>
                     </div>
                 </div>
-            </div>
+                    <button class="pay-button">Pay Now</button>
+            </form>
 
-            <div id="netbanking-details" class="payment-form" style="display: none;">
+            <form id="netbanking-details" class="payment-form" style="display: none;" action="payment.php" method="POST">
                 <h3>Select Bank</h3>
                 <div class="input-group">
                     <label for="bank-name">Bank Name</label>
@@ -134,9 +135,10 @@ if ($token !== $_SESSION['token']) {
                         <option value="idbi">IDBI Bank</option>
                     </select>
                 </div>
-            </div>
+                 <button class="pay-button">Pay Now</button>
+            </form>
 
-            <div id="upi-details" class="payment-form" style="display: none;">
+            <form id="upi-details" class="payment-form" style="display: none;" action="payment.php" method="POST">
                 <h3>Enter UPI ID</h3>
                 <div class="input-group">
                     <label for="upi-id">UPI ID</label>
@@ -145,9 +147,10 @@ if ($token !== $_SESSION['token']) {
                         <input type="text" id="upi-id" name="upi-id" placeholder="Enter UPI ID" required>
                     </div>
                 </div>
-            </div>
+                <button class="pay-button">Pay Now</button>
+            </form>
 
-            <div id="wallet-details" class="payment-form" style="display: none;">
+            <form id="wallet-details" class="payment-form" style="display: none;" action="payment.php" method="POST">
                 <h3>Select Wallet</h3>
                 <div class="input-group">
                     <label for="wallet-name">Wallet Name</label>
@@ -157,9 +160,9 @@ if ($token !== $_SESSION['token']) {
                         <option value="gpay">Google Pay</option>
                     </select>
                 </div>
-            </div>
+ <button class="pay-button">Pay Now</button>
+            </form>
 
-            <button class="pay-button">Pay Now</button>
             <p class="secure-payment">
                 <i class="fa fa-shield-alt"></i> Secure Payment
             </p>
