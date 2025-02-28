@@ -5,7 +5,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    /* Remove height: 100vh; */
+    min-height: 100vh; /* Set a minimum height */
     background: url('railway.png') no-repeat center center fixed; /* Train image as background */
     background-size: cover;
     color: white;
@@ -23,6 +24,8 @@ body {
     padding: 30px;
     border-radius: 10px;
     text-align: left;
+    margin-top: 20px; /* Add margin to separate from top */
+    margin-bottom: 20px; /* Add margin to separate from bottom */
 }
 
 h2 {
@@ -32,6 +35,34 @@ h2 {
     margin-bottom: 20px;
     text-align: center;
     color: #fff;
+}
+
+/* Style the train details section */
+.train-details {
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.train-details h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #fff;
+    text-align: center;
+}
+
+.train-details p {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #eee;
+}
+
+.train-details .cost {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ff6600; /* Orange color for the cost */
+    text-align: center;
 }
 
 .payment-methods {
