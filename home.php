@@ -36,7 +36,7 @@ $token = $_SESSION['token'];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Train Ticket Booking</title>
+    <title>Train Search</title>
     <link rel="stylesheet" href="home.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
@@ -44,8 +44,8 @@ $token = $_SESSION['token'];
     <div class="container">
         <div class="left-section">
             <div class="logo-area">
-                <img src="irctc_logo.png" alt="IRCTC Logo" class="irctc-logo">
-                <span class="indian-railways-text">Indian Railways</span>
+                
+                <span class="indian-railways-text"></span>
             </div>
         </div>
         <div class="right-section">
