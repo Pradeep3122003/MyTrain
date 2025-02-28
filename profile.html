@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="container">
+        <div class="overlay">
+            <div class="profile-content">
+                <h1 style="color: white;">Hey, <span id="username">User</span>!</h1>
+                <h3>Your Ticket History</h3>
+                <table class="history-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>From</th>
+                            <th>To</th>
+                            <th>Date</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Delhi</td>
+                            <td>Jaipur</td>
+                            <td>2025-03-10</td>
+                            <td>
+                                <button class="details-btn" onclick="showDetails('Delhi', 'Jaipur', '2025-03-10', '2025-03-01', 1500)">View</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Mumbai</td>
+                            <td>Pune</td>
+                            <td>2025-02-25</td>
+                            <td>
+                                <button class="details-btn" onclick="showDetails('Mumbai', 'Pune', '2025-02-25', '2025-02-15', 1200)">View</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button class="book-btn" onclick="location.href='home.php'">Book New Ticket</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popup for Ticket Details -->
+    <div id="details-popup" class="popup hidden">
+        <div class="popup-content">
+            <h3 style="align-items: center;">Ticket Details</h3>
+            <table border="1" style="border-collapse: collapse; width: 50%; text-align: left;">
+                <thead>
+                    <tr>
+                        <th style="padding: 10px;"><h3>detail</h3></th>
+                        <th><h3>Information</h3></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>From</strong></td>
+                        <td><span id="ticket-from"></span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>To</strong></td>
+                        <td><span id="ticket-to"></span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Travel Date</strong></td>
+                        <td><span id="ticket-date"></span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Booking Date</strong></td>
+                        <td><span id="ticket-booking-date"></span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Price</strong></td>
+                        <td>₹<span id="ticket-price"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <button class="close-btn" onclick="closePopup()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        function showDetails(from, to, travelDate, bookingDate, price) {
+            document.getElementById('ticket-from').innerText = from;
+            document.getElementById('ticket-to').innerText = to;
+            document.getElementById('ticket-date').innerText = travelDate;
+            document.getElementById('ticket-booking-date').innerText = bookingDate;
+            document.getElementById('ticket-price').innerText = price;
+
+            document.getElementById('details-popup').classList.remove('hidden');
+        }
+
+        function closePopup() {
+            document.getElementById('details-popup').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
