@@ -154,3 +154,38 @@ p {
     text-align: center;
     margin-top: 20px;
 }
+/* Style for dropdown buttons */
+.input-with-icon select {
+    width: 100%;
+    padding: 10px 30px; /* Add padding for content and custom arrow */
+    border: 1px solid #555;
+    background: #333; /* Background color matching input fields */
+    color: white; /* Text color */
+    outline: none;
+    border-radius: 5px; /* Rounded corners */
+    font-size: 16px;
+    appearance: none; /* Removes the default dropdown arrow */
+    cursor: pointer;
+    transition: border-color 0.3s, background-color 0.3s;
+    background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ccc"%3E%3Cpath d="M7 10l5 5 5-5z"/%3E%3C/svg%3E'); /* Custom dropdown arrow */
+    background-repeat: no-repeat;
+    background-position: right 10px center; /* Position of the arrow */
+    background-size: 12px;
+}
+
+/* On hover, change background or border */
+.input-with-icon select:hover {
+    background-color: #444; /* Slightly lighter background on hover */
+}
+
+/* On focus, highlight the border */
+.input-with-icon select:focus {
+    border-color: #ff6600; /* Orange border on focus */
+}
+
+/* Add some spacing for dropdown options */
+select option {
+    padding: 10px;
+    background: #333;
+    color: white;
+}
