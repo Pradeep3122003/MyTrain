@@ -48,6 +48,8 @@ $token = $_SESSION['token'];
 } else {
     die("Query failed: " . $link->error);
 }
+} else {
+   die("Invalid Access");
 }
 ?>
 <!DOCTYPE html>

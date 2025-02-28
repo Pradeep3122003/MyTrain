@@ -8,7 +8,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['name'] = $_POST['name'];
         $_SESSION['email'] = $_POST['email'];
         $_SESSION['token'] = $_POST['token'];
-    }
+    } else {
+
+         die("Invaid Access");
+}
+} else {
+
+if (isset($_GET['name']) && isset($_GET['email']) && isset($_GET['token'])) {
+        $_SESSION['name'] = $_GET['name'];
+        $_SESSION['email'] = $_GET['email'];
+        $_SESSION['token'] = $_GET['token'];
+    } else {
+
+         die("Invaid Access");
+}
+
 }
 
 // Check session values
