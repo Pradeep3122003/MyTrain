@@ -12,8 +12,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $to = $_POST["to"];
     $date = $_POST["date"];
     $token = $_POST["token"];
-
-if (!isset($_SESSION['token'])) {
+    $user = $_POST["user"];
+    $email = $_POST["email"];
+if (!isset($_SESSION['token']) || !isset($_POST['user']) || !isset($_POST['email'])) {
     die("Unauthorized access!");
 }
 
@@ -182,7 +183,9 @@ Trains Available</br></h2>
                     data-dest="<?= htmlspecialchars($row['dest']) ?>"
                     data-src_depar="<?= htmlspecialchars($row['src_depar']) ?>"
                     data-dest_arriv="<?= htmlspecialchars($row['dest_arriv']) ?>"
-                    data-distance="<?= htmlspecialchars($row['distance']) ?>">
+                    data-distance="<?= htmlspecialchars($row['distance']) ?>"
+                    data-user="<?= htmlspecialchars($user) ?>"
+                    data-email="<?= htmlspecialchars($email) ?>">
                     Book
                 </button>
             </td>
@@ -208,8 +211,10 @@ buttons.forEach(button => {
         let src_depar = encodeURIComponent(button.getAttribute("data-src_depar"));
         let dest_arriv = encodeURIComponent(button.getAttribute("data-dest_arriv"));
         let distance = encodeURIComponent(button.getAttribute("data-distance"));
+        let user = encodeURIComponent(button.getAttribute("data-user"));
+        let email = encodeURIComponent(button.getAttribute("data-email"));
 
-        window.open(`payment.php?token=${token}&name=${name}&src=${src}&dest=${dest}&src_depar=${src_depar}&dest_arriv=${dest_arriv}&distance=${distance}`, "_self");
+        window.open(`payment.php?token=${token}&name=${name}&src=${src}&dest=${dest}&src_depar=${src_depar}&dest_arriv=${dest_arriv}&distance=${distance}&user=${user}&email=${email}`, "_self");
     });
 });
 

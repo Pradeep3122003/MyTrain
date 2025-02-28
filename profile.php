@@ -1,37 +1,47 @@
 <?php
-
 session_start();
-// Check if name and mob are passed via URL and set them in the session
-if (isset($_POST['name']) && isset($_POST['email'])) {
-    $_SESSION['name'] = $_POST['name'];
-    $_SESSION['email'] = $_POST['email'];
+require("db.php");
+
+// Store POST data in session
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['token'])) {
+        $_SESSION['name'] = $_POST['name'];
+        $_SESSION['email'] = $_POST['email'];
+        $_SESSION['token'] = $_POST['token'];
+    }
 }
 
+// Check session values
 if (!isset($_SESSION['name']) || !isset($_SESSION['email']) || !isset($_SESSION['token'])) {
     die("Unauthorized access!");
 }
 
-// Validate the token
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Check token sent with form submission (POST)
-    if (!isset($_POST['token']) || $_POST['token'] !== $_SESSION['token']) {
-        die("Invalid token!");
-    }
-} else {
-    // Check token in GET request (page load)
-    if (!isset($_GET['token']) || $_GET['token'] !== $_SESSION['token']) {
-        die("Invalid token!");
-    }
-}
-
-require("db.php");
-
-// User is authenticated
 $user = $_SESSION['name'];
 $email = $_SESSION['email'];
 $token = $_SESSION['token'];
-?>
 
+// Fetch tickets from DB
+$sql = "SELECT * FROM pay WHERE name = ? AND email = ?";
+$stmt = $link->prepare($sql);
+$exist = 2;
+$rows = [];
+
+if ($stmt) {
+    $stmt->bind_param("ss", $user, $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $exist = 1;
+        while ($row = $result->fetch_assoc()) {
+            $rows[] = $row;
+        }
+    }
+    $stmt->close();
+} else {
+    die("Query failed: " . $link->error);
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -40,13 +50,13 @@ $token = $_SESSION['token'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile Page</title>
     <link rel="stylesheet" href="profile.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <div class="container">
         <div class="overlay">
             <div class="profile-content">
-                <h1 style="color: white;">Hey, <span id="username">User</span>!</h1>
+                <h1 style="color: white;">Hey, <span id="username"><?php echo htmlspecialchars($user); ?></span>!</h1>
                 <h3>Your Ticket History</h3>
                 <table class="history-table">
                     <thead>
@@ -59,27 +69,32 @@ $token = $_SESSION['token'];
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Delhi</td>
-                            <td>Jaipur</td>
-                            <td>2025-03-10</td>
-                            <td>
-                                <button class="details-btn" onclick="showDetails('Delhi', 'Jaipur', '2025-03-10', '2025-03-01', 1500)">View</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Mumbai</td>
-                            <td>Pune</td>
-                            <td>2025-02-25</td>
-                            <td>
-                                <button class="details-btn" onclick="showDetails('Mumbai', 'Pune', '2025-02-25', '2025-02-15', 1200)">View</button>
-                            </td>
-                        </tr>
+                        <?php if ($exist == 1): ?>
+                            <?php foreach ($rows as $index => $row): ?>
+                                <tr>
+                                    <td><?= $index + 1 ?></td>
+                                    <td><?= htmlspecialchars($row['src']) ?></td>
+                                    <td><?= htmlspecialchars($row['dest']) ?></td>
+                                    <td><?= htmlspecialchars($row['date']) ?></td>
+                                    <td>
+                                        <button class="details-btn" onclick="showDetails(
+                                            '<?= htmlspecialchars($row['src']) ?>',
+                                            '<?= htmlspecialchars($row['dest']) ?>',
+                                            '<?= htmlspecialchars($row['date']) ?>',
+                                            '<?= htmlspecialchars($row['book']) ?>',
+                                            '<?= htmlspecialchars($row['cost']) ?>'
+                                        )">View</button>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <tr>
+                                <td colspan="5">No tickets found.</td>
+                            </tr>
+                        <?php endif; ?>
                     </tbody>
                 </table>
-                <button class="book-btn" onclick="location.href='home.php?name=<?php echo $name ?>&email=<?php echo $email ?>&token=<?php echo $token ?>'">Book New Ticket</button>
+                <button class="book-btn" onclick="location.href='home.php?name=<?= htmlspecialchars($user) ?>&email=<?= htmlspecialchars($email) ?>&token=<?= htmlspecialchars($token) ?>'">Book New Ticket</button>
             </div>
         </div>
     </div>
@@ -91,8 +106,8 @@ $token = $_SESSION['token'];
             <table border="1" style="border-collapse: collapse; width: 50%; text-align: left;">
                 <thead>
                     <tr>
-                        <th style="padding: 10px;"><h3>detail</h3></th>
-                        <th><h3>Information</h3></th>
+                        <th>Detail</th>
+                        <th>Information</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -118,7 +133,6 @@ $token = $_SESSION['token'];
                     </tr>
                 </tbody>
             </table>
-
             <button class="close-btn" onclick="closePopup()">Close</button>
         </div>
     </div>

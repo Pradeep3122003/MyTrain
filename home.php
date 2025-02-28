@@ -127,7 +127,8 @@ $token = $_SESSION['token'];
                     
                     <!-- Hidden Token -->
                     <input type="hidden" name="token" value="<?php echo $token; ?>">
-                    
+                    <input type="hidden" name="user" value="<?php echo $user; ?>">
+                    <input type="hidden" name="email" value="<?php echo $email; ?>">
                     <!-- Submit Button -->
                     <button type="submit">SEARCH</button>
                 </form>

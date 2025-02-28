@@ -6,17 +6,74 @@ ini_set('display_errors', 1);
 session_start();
 require("db.php");
 
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+ $token = $_POST['token'] ?? null;
+ $name = $_POST['name'] ?? null;
+ $src = $_POST['src'] ?? null;
+ $dest = $_POST['dest'] ?? null;
+ $src_depar = $_POST['src_depar'] ?? null;
+ $dest_arriv = $_POST['dest_arriv'] ?? null;
+ $distance = $_POST['distance'] ?? null;
+ $user = $_POST['user'] ?? null;
+ $email = $_POST['email'] ?? null;
+
+
+if ($token !== $_SESSION['token']) {
+    die("Invalid token!");
+}
+
+//if ($user !== $_SESSION['user'] || $email !== $_SESSION['email']) {
+//    die("Unauthorised access!");
+//}
+
+if (!isset($_POST['name']) ||
+    !isset($_POST['src']) ||
+    !isset($_POST['dest']) ||
+    !isset($_POST['src_depar']) ||
+    !isset($_POST['dest_arriv']) ||
+    !isset($_POST['distance']) || 
+    !isset($_POST['user']) ||
+    !isset($_POST['email'])){
+    die("Enter all fields!");
+}
+
+
+       //$name = $_POST["name"];
+        //$name = mysqli_real_escape_string($link, $name);
+
+        //$email = $_POST["email"];
+        //$email = mysqli_real_escape_string($link, $email);
+
+        //$pass = $_POST["password"];
+        //$pass = mysqli_real_escape_string($link, $pass);
+
+        // Check if the user already exists
+        //$sql = "SELECT * FROM login WHERE email = '$email'";
+
+        //$result = $link->query($sql);
+
+        //if ($result->num_rows > 0) {
+        //    $exist = 1;
+        //} else {
+            // Insert new user into the database
+          //  $sql_insert = "INSERT INTO login(name,email,password) VALUES ('$name', '$email', '$pass')";
+            //if ($link->query($sql_insert) === TRUE) {
+              //  $exist = 2;
+                //header("Location: login.php");
+
+            //} else {
+              //  echo "<p>Error: " . $link->error . "</p>";
+            //}
+        
+    }  else {
 // Ensure session token exists
 if (!isset($_SESSION['token'])) {
     die("Unauthorized access!");
 }
 
-if (!isset($_GET['name']) || 
-    !isset($_GET['src']) || 
-    !isset($_GET['dest']) || 
-    !isset($_GET['src_depar']) || 
-    !isset($_GET['dest_arriv']) ||  
-    !isset($_GET['distance'])) {   
+if (!isset($_GET['name']) || !isset($_GET['src']) || !isset($_GET['dest']) || !isset($_GET['src_depar']) || !isset($_GET['dest_arriv']) ||  !isset($_GET['distance']) || !isset($_GET['user']) || !isset($_GET['email'])) {   
     die("Enter all fields!");
 }
 
@@ -28,10 +85,12 @@ $dest = $_GET['dest'] ?? null;
 $src_depar = $_GET['src_depar'] ?? null;
 $dest_arriv = $_GET['dest_arriv'] ?? null;
 $distance = $_GET['distance'] ?? null;
-
+$user = $_GET['user'] ?? null;
+$email = $_GET['email'] ?? null;
 // Validate token
 if ($token !== $_SESSION['token']) {
     die("Invalid token!");
+}
 }
 
 ?>
@@ -58,12 +117,13 @@ if ($token !== $_SESSION['token']) {
                 <p>Date: <?php echo $src_depar ?></p>
                 <div class="input-group">
                     <label for="seat-type">Seat Type</label>
-                    <select id="seat-type" name="seat-type">
-                        <option value="sleeper">Sleeper  <span style="color:blue;"><?php echo $distance; ?> RS</span></option>
-                        <option value="ac3">AC 3-Tier  <span style="color:blue;"><?php echo $distance * 3; ?> RS</span></option>
-                        <option value="ac2">AC 2-Tier  <span style="color:blue;"><?php echo $distance * 5; ?> RS</span></option>
-                        <option value="ac1">AC 1-Tier  <span style="color:blue;"><?php echo $distance * 7; ?> RS</span></option>
-                    </select>
+<select id="seat-type" name="seat-type" onchange="updatePrice()">
+    <option value="<?php echo $distance; ?>">Sleeper - <?php echo $distance; ?> RS</option>
+    <option value="<?php echo $distance * 3; ?>">AC 3-Tier - <?php echo $distance * 3; ?> RS</option>
+    <option value="<?php echo $distance * 5; ?>">AC 2-Tier - <?php echo $distance * 5; ?> RS</option>
+    <option value="<?php echo $distance * 7; ?>">AC 1-Tier - <?php echo $distance * 7; ?> RS</option>
+</select>
+
                 </div>
 
             </div>
@@ -147,6 +207,15 @@ if ($token !== $_SESSION['token']) {
                         <input type="text" id="upi-id" name="upi-id" placeholder="Enter UPI ID" required>
                     </div>
                 </div>
+                 <input type="hidden" name="token" value=<?php echo $token ?>>
+                 <input type="hidden" name="name" value=<?php echo $name ?>>
+                 <input type="hidden" name="src" value=<?php echo $src ?>>
+                  <input type="hidden" name="dest" value=<?php echo $dest ?>>
+                  <input type="hidden" name="src_depar" value=<?php echo $src_depar ?>>
+                 <input type="hidden" name="dest_arriv" value=<?php echo $dest_arriv ?>>
+                  <input type="hidden" name="distance" value=<?php echo $distance ?>>
+                 <input type="hidden" name="user" value=<?php echo $user ?>>
+                  <input type="hidden" name="email" value=<?php echo $email ?>>
                 <button class="pay-button">Pay Now</button>
             </form>
 
