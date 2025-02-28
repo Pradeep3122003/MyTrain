@@ -173,10 +173,10 @@ if ($exist == 1) {
     foreach ($rows as $row) { ?>
         <tr>
             <td><?= htmlspecialchars($row['name']) ?></td>
-            <td><?= htmlspecialchars(date("H:i", strtotime($row['src_depar']))) ?><br><?= htmlspecialchars($row['src']) ?></td>
+            <td><?= htmlspecialchars(date("D : M : Y", strtotime($row['src_depar']))) ?><br><?= htmlspecialchars(date("H:i", strtotime($row['src_depar']))) ?><br><?= htmlspecialchars($row['src']) ?></td>
             <td><?= htmlspecialchars($row['distance']) ?> km</td>
-            <td><?= htmlspecialchars(date("H:i", strtotime($row['dest_arriv']))) ?><br><?= htmlspecialchars($row['dest']) ?></td>
-            <td><button class="book-btn" id="paybtn">Book</button></td>
+            <td><?= htmlspecialchars(date("D : M : Y", strtotime($row['src_depar']))) ?><br><?= htmlspecialchars(date("H:i", strtotime($row['dest_arriv']))) ?><br><?= htmlspecialchars($row['dest']) ?></td>
+            <td><button class="book-btn">Book</button></td>
         </tr>
     <?php }
 } else { ?>
@@ -187,10 +187,16 @@ if ($exist == 1) {
             </tbody>
         </table>
 <script>
-let login =document.getElementById("paybtn")
-login.onclick = () => {
-    window.open("payment.php", "_self");
-}</script>
+
+let buttons = document.querySelectorAll(".book-btn"); // Select all buttons
+
+buttons.forEach(button => {
+    button.addEventListener("click", () => {
+        window.open("payment.php", "_self");
+    });
+});
+
+</script>
 
     </div>
 </body>
