@@ -45,13 +45,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <form action="login.php" method="POST">
             <div class="input-group">
                 <label for="username">Username</label>
-                <input type="text" id="name" name="name" placeholder="Enter your username">
+                <input type="text" id="name" name="name" placeholder="Enter your username" required>
             </div>
             <div class="input-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Enter your password">
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
             </div>
             <button type="submit">Login</button>
+            <?php 
+                if("$exist" === "2"){
+                  echo "<p>Invalid name or password</p>";
+                }
+             ?>
             <p>Don't have an account? <a href="index.php"><br>Create one</a></p>
         </form>
     </div>
