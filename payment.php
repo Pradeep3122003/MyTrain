@@ -52,20 +52,20 @@ if ($token !== $_SESSION['token']) {
 
             <div class="train-details">
                 <h3>Train Details</h3>
-                <p>Train Name: Express 12345</p>
-                <p>From: Station A</p>
-                <p>To: Station B</p>
-                <p>Date: 2025-03-05</p>
+                <p>Train Name: <?php echo $name ?></p>
+                <p>From: <?php echo $src ?></p>
+                <p>To: <?php echo $dest ?></p>
+                <p>Date: <?php echo $src_depar ?></p>
                 <div class="input-group">
                     <label for="seat-type">Seat Type</label>
                     <select id="seat-type" name="seat-type">
-                        <option value="sleeper">Sleeper</option>
-                        <option value="ac3">AC 3-Tier</option>
-                        <option value="ac2">AC 2-Tier</option>
-                        <option value="ac1">AC 1-Tier</option>
+                        <option value="sleeper">Sleeper  <span style="color:blue;"><?php echo $distance; ?> RS</span></option>
+                        <option value="ac3">AC 3-Tier  <span style="color:blue;"><?php echo $distance * 3; ?> RS</span></option>
+                        <option value="ac2">AC 2-Tier  <span style="color:blue;"><?php echo $distance * 5; ?> RS</span></option>
+                        <option value="ac1">AC 1-Tier  <span style="color:blue;"><?php echo $distance * 7; ?> RS</span></option>
                     </select>
                 </div>
-                <p class="cost">Cost: Rs. 500</p>
+
             </div>
 
             <h2>Payment Details</h2>
