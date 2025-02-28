@@ -1,3 +1,42 @@
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+?>
+<?php
+session_start();
+require("db.php");
+
+// Ensure session token exists
+if (!isset($_SESSION['token'])) {
+    die("Unauthorized access!");
+}
+
+if (!isset($_GET['name']) || 
+    !isset($_GET['src']) || 
+    !isset($_GET['dest']) || 
+    !isset($_GET['src_depar']) || 
+    !isset($_GET['dest_arriv']) ||  
+    !isset($_GET['distance'])) {   
+    die("Enter all fields!");
+}
+
+// Retrieve GET parameters
+$token = $_GET['token'] ?? null;
+$name = $_GET['name'] ?? null;
+$src = $_GET['src'] ?? null;
+$dest = $_GET['dest'] ?? null;
+$src_depar = $_GET['src_depar'] ?? null;
+$dest_arriv = $_GET['dest_arriv'] ?? null;
+$distance = $_GET['distance'] ?? null;
+
+// Validate token
+if ($token !== $_SESSION['token']) {
+    die("Invalid token!");
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,11 +52,11 @@
             
             <div class="train-details">
                 <h3>Train Details</h3>
-                <p>Train Name: Express 12345</p>
-                <p>From: Station A</p>
-                <p>To: Station B</p>
-                <p>Date: 2025-03-05</p>
-                <p class="cost">Cost: Rs. 500</p>
+                <p>Train Name: <?php echo $name ?></p>
+                <p>From: <?php echo $src ?></p>
+                <p>To: <?php echo $dest ?></p>
+                <p>Date: <?php echo $src_depar ?></p>
+                <p class="cost">SL: <span style="color:white;">RS <?php echo $distance ?></span> 3AC: <span style="color:white;">RS <?php echo $distance * 3?></span> 2AC: <span style="color:white;">RS <?php echo $distance * 5?></span></p>
             </div>
 
             <h2>Payment Details</h2>

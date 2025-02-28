@@ -131,7 +131,6 @@ $token = $_SESSION['token'];
                     <!-- Submit Button -->
                     <button type="submit">SEARCH</button>
                 </form>
-                <p>Don't have an account? <a href="signin.html">Create new</a></p>
             </div>
         </div>
     </div>

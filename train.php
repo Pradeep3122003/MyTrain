@@ -42,7 +42,7 @@ if ($stmt) {
     } else {
         $exist = 2; // No match found
     }
-
+$token = $_SESSION['token'];
     $stmt->close();
 } else {
     die("Query failed: " . $link->error);
@@ -168,18 +168,27 @@ Trains Available</br></h2>
             </thead>
             <tbody>
 
-<?php
-if ($exist == 1) {
-    foreach ($rows as $row) { ?>
+<?php if ($exist == 1) { ?>
+    <?php foreach ($rows as $row) { ?>
         <tr>
             <td><?= htmlspecialchars($row['name']) ?></td>
             <td><?= htmlspecialchars(date("D : M : Y", strtotime($row['src_depar']))) ?><br><?= htmlspecialchars(date("H:i", strtotime($row['src_depar']))) ?><br><?= htmlspecialchars($row['src']) ?></td>
             <td><?= htmlspecialchars($row['distance']) ?> km</td>
-            <td><?= htmlspecialchars(date("D : M : Y", strtotime($row['src_depar']))) ?><br><?= htmlspecialchars(date("H:i", strtotime($row['dest_arriv']))) ?><br><?= htmlspecialchars($row['dest']) ?></td>
-            <td><button class="book-btn">Book</button></td>
+            <td><?= htmlspecialchars(date("D : M : Y", strtotime($row['dest_arriv']))) ?><br><?= htmlspecialchars(date("H:i", strtotime($row['dest_arriv']))) ?><br><?= htmlspecialchars($row['dest']) ?></td>
+            <td>
+                <button class="book-btn"
+                    data-name="<?= htmlspecialchars($row['name']) ?>"
+                    data-src="<?= htmlspecialchars($row['src']) ?>"
+                    data-dest="<?= htmlspecialchars($row['dest']) ?>"
+                    data-src_depar="<?= htmlspecialchars($row['src_depar']) ?>"
+                    data-dest_arriv="<?= htmlspecialchars($row['dest_arriv']) ?>"
+                    data-distance="<?= htmlspecialchars($row['distance']) ?>">
+                    Book
+                </button>
+            </td>
         </tr>
-    <?php }
-} else { ?>
+    <?php } ?>
+<?php } else { ?>
     <p>Please do check for other dates.</p>
 <?php } ?>
 
@@ -188,13 +197,22 @@ if ($exist == 1) {
         </table>
 <script>
 
-let buttons = document.querySelectorAll(".book-btn"); // Select all buttons
+let buttons = document.querySelectorAll(".book-btn"); 
+let token = "<?php echo htmlspecialchars($token, ENT_QUOTES, 'UTF-8'); ?>";
 
 buttons.forEach(button => {
     button.addEventListener("click", () => {
-        window.open("payment.php", "_self");
+        let name = encodeURIComponent(button.getAttribute("data-name"));
+        let src = encodeURIComponent(button.getAttribute("data-src"));
+        let dest = encodeURIComponent(button.getAttribute("data-dest"));
+        let src_depar = encodeURIComponent(button.getAttribute("data-src_depar"));
+        let dest_arriv = encodeURIComponent(button.getAttribute("data-dest_arriv"));
+        let distance = encodeURIComponent(button.getAttribute("data-distance"));
+
+        window.open(`payment.php?token=${token}&name=${name}&src=${src}&dest=${dest}&src_depar=${src_depar}&dest_arriv=${dest_arriv}&distance=${distance}`, "_self");
     });
 });
+
 
 </script>
 
