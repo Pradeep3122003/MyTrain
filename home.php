@@ -29,7 +29,7 @@ require("db.php");
 // User is authenticated
 $user = $_SESSION['name'];
 $email = $_SESSION['email'];
-
+$token = $_SESSION['token'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
