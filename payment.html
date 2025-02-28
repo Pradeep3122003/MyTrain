@@ -1,26 +1,3 @@
-<?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-?>
-<?php
-session_start();
-require("db.php");
-
-// Ensure the session token exists
-if (!isset($_SESSION['token'])) {
-    die("Unauthorized access!");
-}
-
-$token = $_REQUEST["token"] ?? null; // Accept token from GET or POST
-
-// Validate token
-if (!$token || $token !== $_SESSION['token']) {
-    die("Invalid token!");
-}
-
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
