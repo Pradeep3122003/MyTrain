@@ -96,7 +96,9 @@ if ($stmt) {
                                             '<?= htmlspecialchars($row['dest']) ?>',
                                             '<?= htmlspecialchars($row['date']) ?>',
                                             '<?= htmlspecialchars($row['book']) ?>',
-                                            '<?= htmlspecialchars($row['cost']) ?>'
+                                            '<?= htmlspecialchars($row['cost']) ?>',
+                                            '<?= htmlspecialchars($row['pin']) ?>',
+                                            '<?= htmlspecialchars($row['train']) ?>'
                                         )">View</button>
                                     </td>
                                 </tr>
@@ -126,6 +128,14 @@ if ($stmt) {
                 </thead>
                 <tbody>
                     <tr>
+                        <td><strong>Train</strong></td>
+                        <td><span id="ticket-name"></span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>No</strong></td>
+                        <td><span id="ticket-pin"></span></td>
+                    </tr>
+                    <tr>
                         <td><strong>From</strong></td>
                         <td><span id="ticket-from"></span></td>
                     </tr>
@@ -152,12 +162,14 @@ if ($stmt) {
     </div>
 
     <script>
-        function showDetails(from, to, travelDate, bookingDate, price) {
+        function showDetails(from, to, travelDate, bookingDate, price, pin, name) {
             document.getElementById('ticket-from').innerText = from;
             document.getElementById('ticket-to').innerText = to;
             document.getElementById('ticket-date').innerText = travelDate;
             document.getElementById('ticket-booking-date').innerText = bookingDate;
             document.getElementById('ticket-price').innerText = price;
+            document.getElementById('ticket-pin').innerText = pin;
+            document.getElementById('ticket-name').innerText = name;
 
             document.getElementById('details-popup').classList.remove('hidden');
         }
