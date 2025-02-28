@@ -33,8 +33,12 @@ if ($stmt) {
     $stmt->execute();
     $result = $stmt->get_result();
 
-    if ($row = $result->fetch_assoc()) {
+    if ($result->num_rows > 0) {
         $exist = 1;
+        $rows = []; // Store all rows
+        while ($row = $result->fetch_assoc()) {
+            $rows[] = $row; // Append each row
+        }
     } else {
         $exist = 2; // No match found
     }
@@ -43,10 +47,7 @@ if ($stmt) {
 } else {
     die("Query failed: " . $link->error);
 }
-
-} else {
-  die("Invalid access");
-}    // Prepare SQL to fetch email along with validation
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -166,8 +167,10 @@ Trains Available</br></h2>
                 </tr>
             </thead>
             <tbody>
-                <?php if ($exist == 1) { ?>
 
+<?php
+if ($exist == 1) {
+    foreach ($rows as $row) { ?>
         <tr>
             <td><?= htmlspecialchars($row['name']) ?></td>
             <td><?= htmlspecialchars(date("H:i", strtotime($row['src_depar']))) ?><br><?= htmlspecialchars($row['src']) ?></td>
@@ -175,10 +178,12 @@ Trains Available</br></h2>
             <td><?= htmlspecialchars(date("H:i", strtotime($row['dest_arriv']))) ?><br><?= htmlspecialchars($row['dest']) ?></td>
             <td><button class="book-btn" id="paybtn">Book</button></td>
         </tr>
-
-<?php } else { ?>
+    <?php }
+} else { ?>
     <p>Please do check for other dates.</p>
 <?php } ?>
+
+
             </tbody>
         </table>
 <script>
