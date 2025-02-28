@@ -28,7 +28,7 @@ if (isset($_SESSION['token_time']) && (time() - $_SESSION['token_time'] > $token
 }
 
 // Redirect to train.php with token
-header("Location: home.php?" . http_build_query([
+header("Location: profile.php?" . http_build_query([
     'name' => $_SESSION['name'],
     'email' => $_SESSION['email'],
     'token' => $_SESSION['token']
