@@ -59,10 +59,10 @@ if ($token !== $_SESSION['token']) {
                 <div class="input-group">
                     <label for="seat-type">Seat Type</label>
                     <select id="seat-type" name="seat-type">
-                        <option value="sleeper">Sleeper  <span style="color:blue;"><?php echo $distance; ?> RS</span></option>
-                        <option value="ac3">AC 3-Tier  <span style="color:blue;"><?php echo $distance * 3; ?> RS</span></option>
-                        <option value="ac2">AC 2-Tier  <span style="color:blue;"><?php echo $distance * 5; ?> RS</span></option>
-                        <option value="ac1">AC 1-Tier  <span style="color:blue;"><?php echo $distance * 7; ?> RS</span></option>
+                        <option value="sleeper">Sleeper  <p class="inlinespan"><?php echo $distance; ?> RS</p></option>
+                        <option value="ac3">AC 3-Tier  <span class="inlinespan"><?php echo $distance * 3; ?> RS</span></option>
+                        <option value="ac2">AC 2-Tier  <span class="inlinespan"><?php echo $distance * 5; ?> RS</span></option>
+                        <option value="ac1">AC 1-Tier  <span class="inlinespan"><?php echo $distance * 7; ?> RS</span></option>
                     </select>
                 </div>
 

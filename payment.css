@@ -180,3 +180,8 @@ input:focus, select:focus {
 .input-with-icon input {
     padding-left: 30px; /* Adjust to make space for the icon */
 }
+.inlinespan
+{
+    color: blue;
+    display: inline;
+}
